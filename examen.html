@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGastos - Domina tus Finanzas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .code-window {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #333;
+            height: 100%; /* Para igualar altura si es necesario */
+        }
+
+        .code-header {
+            background-color: #333;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .filename {
+            color: #9cdcfe;
+            font-family: monospace;
+            font-size: 0.875rem;
+            margin-left: 10px;
+        }
+
+        .code-content {
+            padding: 20px;
+            color: #d4d4d4;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .img-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-gray-800">
+
+    <nav class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-teal-600 tracking-tight">
+                <i class="fas fa-wallet mr-2"></i>Calculadora de gastos personales mensuales
+            </h1>
+            <a href="Interfaz.html" class="flex items-center gap-2 bg-slate-800 text-white px-5 py-2 rounded-full hover:bg-slate-700 transition font-medium shadow-sm">
+                <i class="fas fa-arrow-left text-sm"></i> Volver
+            </a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-12 px-4">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div class="lg:col-span-2 bg-black rounded-2xl overflow-hidden shadow-2xl">
+                <div class="aspect-video">
+                    <iframe class="w-full h-full" src="https://drive.google.com/file/d/1m072V0dlVc1memqnWAY09Fi-DRRf5b9M/preview" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <div class="bg-white p-6 rounded-2xl border border-teal-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">Control Financiero</h4>
+                    <p class="text-gray-600 text-sm">Registrar tus gastos es el primer paso para el ahorro inteligente.</p>
+                </div>
+                <div class="bg-teal-600 p-6 rounded-2xl text-white shadow-lg">
+                    <h4 class="font-bold mb-2">Privacidad</h4>
+                    <p class="text-sm text-teal-50">Tus datos no salen de tu ordenador.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span class="filename">gestor_gastos.py</span>
+                </div>
+                <pre class="code-content"><code>import tkinter as tk
+from tkinter import messagebox
+
+def calcular_gastos():
+    try:
+        ali = float(entry_comida.get()) 
+        tra = float(entry_transporte.get())
+        viv = float(entry_vivienda.get())
+        total = ali + tra + viv
+        
+        color = "#e74c3c" if total > 500 else "#2ecc71"
+        res = "Elevado" if total > 500 else "Saludable"
+            
+        label_resultado.config(text=f"${total:.2f}", fg=color)
+        label_info.config(text=f"Estado: {res}")
+        
+    except ValueError:
+        messagebox.showerror("Error", "Dato no válido")
+
+ventana = tk.Tk()
+ventana.title("EduGastos")
+ventana.geometry("300x400")
+
+tk.Label(ventana, text="Gastos Mensuales", font=("Arial", 12, "bold")).pack(pady=10)
+# ... campos de entrada ...
+ventana.mainloop()</code></pre>
+            </div>
+
+            <div class="img-container">
+                <img src="GASTO.png" alt="Interfaz Gráfica del programa">
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-500 py-6 text-center text-sm mt-12">
+        <p>© 2026 ITECSUR – Instituto Superior Universitario Compu Sur</p>
+    </footer>
+    
+
+</body>
+</html>
