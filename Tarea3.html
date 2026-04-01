@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Dev - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --glass: rgba(15, 15, 25, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, rgba(5, 5, 7, 0.8), rgba(5, 5, 7, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1800px; 
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero-section {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        /* ESTILO DEL BOTÓN REGRESAR */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 900px;
+        }
+
+        .content-layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .video-wrapper {
+            flex: 2; 
+            min-width: 450px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .code-window {
+            flex: 1;
+            min-width: 320px;
+            background: #1e1e2e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-header {
+            background: #313244;
+            padding: 10px 20px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #f38ba8; }
+        .yellow { background: #f9e2af; }
+        .green { background: #a6e3a1; }
+
+        .code-description {
+            padding: 20px;
+            margin: 0;
+            color: #cdd6f4;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .tech-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--accent);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1400px) {
+            .video-wrapper {
+                flex: 100%;
+                max-width: 1000px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <div class="main-container">
+        <header class="hero-section">
+            <a href="Interfaz.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Regresar al Menú
+            </a>
+            <br>
+            <div class="tech-badge">
+                <i class="fas fa-terminal"></i> Sentencia if
+            </div>
+            <h1>La sentencia if en Python permite ejecutar bloques de código condicionalmente si una expresión es verdadera (True). Se estructura usando if para la condición principal, elif (else if) para condiciones adicionales, y else para el caso predeterminado, siempre terminando en dos puntos (:) y usando indentación obligatoria</h1>
+        </header>
+
+        <div class="content-layout">
+            
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe 
+                        src="https://drive.google.com/file/d/1L3H8wX9yK9_cFTHT0mdyXpe83Pb3Yglp/preview" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">vocal_check.py</span>
+                </div>
+                <pre class="code-description">
+# Solicitar una letra al usuario
+letra = input("Introduce una letra: ").lower()
+
+# Verificar si la letra es una vocal
+if letra in "aeiou":
+    print(f"La letra {letra} es una vocal")
+else:
+    print(f"La letra {letra} no es una vocal")
+                </pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">notas.py</span>
+                </div>
+                <pre class="code-description">
+# Solicitar la nota al usuario
+nota = int(input("Introduce la nota (0-10): "))
+
+# Verificar aprobación (≥ 7)
+if nota >= 7:
+    print("Estado: APROBADO")
+else:
+    print("Estado: REPROBADO")
+                </pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">mayor_que.py</span>
+                </div>
+                <pre class="code-description">
+# Solicitar dos números
+num1 = int(input("Número 1: "))
+num2 = int(input("Número 2: "))
+
+# Comparación de magnitudes
+if num1 > num2:
+    print(f"{num1} es el mayor")
+else:
+    print(f"{num2} es el mayor")
+                </pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">multiplo_3.py</span>
+                </div>
+                <pre class="code-description">
+# Verificar múltiplo de 3
+numero = int(input("Introduce un número: "))
+
+if numero % 3 == 0:
+    print(f"{numero} es múltiplo de 3")
+else:
+    print(f"{numero} NO es múltiplo de 3")
+                </pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">signo_num.py</span>
+                </div>
+                <pre class="code-description">
+# Determinar Positivo, Negativo o Cero
+n = float(input("Introduce número: "))
+
+if n > 0:
+    print("Es Positivo")
+elif n < 0:
+    print("Es Negativo")
+else:
+    print("Es Cero")
+                </pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: #94a3b8; font-family: monospace;">bisiesto.py</span>
+                </div>
+                <pre class="code-description">
+# Lógica de año bisiesto
+anio = int(input("Introduce año: "))
+
+if anio % 400 == 0:
+    print("Bisiesto")
+elif anio % 100 == 0:
+    print("No bisiesto")
+elif anio % 4 == 0:
+    print("Bisiesto")
+else:
+    print("No bisiesto")
+                </pre>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

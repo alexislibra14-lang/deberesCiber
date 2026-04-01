@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Deberes Moderno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #ffffff;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Contenedor Grid Responsivo */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Estilo de la Card */
+        .homework-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3), 
+                        -5px -5px 15px rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Efecto Hover: Elevación y Sombra Intensa */
+        .homework-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .homework-card h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin: 10px 0;
+        }
+
+        .homework-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            min-height: 3em; /* Mantiene alineación si los textos varían */
+        }
+
+        /* Botón con Iluminación */
+        .btn-view {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-view:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            filter: brightness(1.1);
+            transform: scale(1.05);
+        }
+
+        .btn-view::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .btn-view:hover::after {
+            opacity: 1;
+            left: 120%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-grid">
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-code"></i>
+            </div>
+            <h2>Deber 1</h2>
+            <p>Pide un número al usuario y muestra si es mayor que 50.</p>
+            <a href="Tarea1.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <h2>Deber 2</h2>
+            <p>Pide la edad de una persona y determina si puede votar (18 años o más).</p>
+            <a href="Tarea2.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-terminal"></i>
+            </div>
+            <h2>If en Python Deber 3</h2>
+            <p>El condicional if en Python nos permite ejecutar un bloque de código únicamente si se cumple una determinada condición.</p>
+            <a href="Tarea3.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-bug"></i>
+            </div>
+            <h2>Bucles Deber 4</h2>
+            <p>Aplica estructuras de repetición (for / while) para resolver los siguientes problemas. Comenta el código de cada solución.</p>
+            <a href="Tarea4.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <h2>Funciones Deber 5</h2>
+            <p>Crea funciones en Python que resuelvan cada uno de los siguientes problemas. Recuerda comentar cada función indicando su propósito, parámetros y valor de retorno.</p>
+            <a href="Tarea5.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+
+        <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <h2>Deber 6</h2>
+            <p>Calculadora de IMC con Tkinter</p>
+            <a href="Tarea6.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+         <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <h2>Deber 7</h2>
+            <p>CALCULADORA CON FUNCIONES EN JAVA.</p>
+            <a href="CALCULADORAJAVA.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+         <div class="homework-card">
+            <div class="icon-container">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <h2>Deber 8</h2>
+            <p>CALCULADORA BASICA CON FUNCIONES.</p>
+            <a href="CALCULADORABASICA.html" target="_blank" class="btn-view">Ver Tarea</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Dev - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --glass: rgba(15, 15, 25, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, rgba(5, 5, 7, 0.8), rgba(5, 5, 7, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* --- Estilo del Botón Regresar --- */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+        }
+
+        .btn-back:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .hero-section {
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin: 10px 0 0 0;
+            background: linear-gradient(90deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .media-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            min-height: 200px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-placeholder img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .code-window {
+            background: #1e1e2e;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .code-header {
+            background: #313244;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dots-group { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #f38ba8; }
+        .yellow { background: #f9e2af; }
+        .green { background: #a6e3a1; }
+
+        .filename {
+            margin-left: 15px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .code-content {
+            padding: 25px;
+            margin: 0;
+            color: #cdd6f4;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+            background: #181825;
+        }
+
+        .code-content::-webkit-scrollbar { width: 8px; }
+        .code-content::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .tech-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--accent);
+            display: inline-block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <div class="main-container">
+        <a href="Interfaz.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Regresar al Menú
+        </a>
+
+        <header class="hero-section">
+            <div class="tech-badge">
+                <i class="fas fa-microchip"></i> CALCULADORA IMC
+            </div>
+            <h1>Entorno de Desarrollo</h1>
+        </header>
+
+        <div class="content-stack">
+            
+            <div class="media-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://drive.google.com/file/d/1Zt5ker_bcI3CBa0Ci0ZeGyICI7KO8zxr/preview" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="image-placeholder">
+                    <img src="IMC.png" alt="Imagen Descriptiva">
+                </div>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dots-group">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <span class="filename">calculadora_imc.py</span>
+                </div>
+                <pre class="code-content">
+import tkinter as tk
+from tkinter import messagebox
+
+def calcular_imc():
+    try:
+        peso = float(entry_peso.get()) 
+        altura = float(entry_altura.get())
+        imc = peso / (altura ** 2)
+        
+        if imc < 18.5:
+            categoria, color = "Bajo peso", "#3498db"
+        elif 18.5 <= imc < 24.9:
+            categoria, color = "Peso normal", "#2ecc71"
+        elif 25 <= imc < 29.9:
+            categoria, color = "Sobrepeso", "#f1c40f"
+        else:
+            categoria, color = "Obesidad", "#e74c3c"
+            
+        label_resultado.config(text=f"IMC: {imc:.2f}", fg=color)
+        label_info.config(text=f"Categoría: {categoria}")
+        
+    except ValueError:
+        messagebox.showerror("Error", "Ingresa valores numéricos.")
+    except ZeroDivisionError:
+        messagebox.showerror("Error", "La altura no puede ser cero.")
+
+# Ventana Principal
+ventana = tk.Tk()
+ventana.title("Calculadora IMC")
+ventana.geometry("300x350")
+
+tk.Label(ventana, text="Calculadora de IMC", font=("Arial", 14, "bold")).pack(pady=10)
+tk.Label(ventana, text="Peso (kg):").pack()
+entry_peso = tk.Entry(ventana, justify="center")
+entry_peso.pack()
+
+tk.Label(ventana, text="Altura (m):").pack(pady=5)
+entry_altura = tk.Entry(ventana, justify="center")
+entry_altura.pack()
+
+tk.Button(ventana, text="Calcular", command=calcular_imc, bg="#2c3e50", fg="white").pack(pady=20)
+
+label_resultado = tk.Label(ventana, text="IMC: --", font=("Arial", 12, "bold"))
+label_resultado.pack()
+
+label_info = tk.Label(ventana, text="Esperando datos...", font=("Arial", 10))
+label_info.pack()
+
+ventana.mainloop()</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

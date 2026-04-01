@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Dev - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --glass: rgba(15, 15, 25, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, rgba(5, 5, 7, 0.8), rgba(5, 5, 7, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1400px; 
+            margin: 0 auto;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero-section {
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+            margin: 10px 0 0 0;
+            background: linear-gradient(90deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* DISEÑO DE CUADRÍCULA ORGANIZADA */
+        .content-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* El video ocupa toda la fila superior */
+        .video-wrapper {
+            grid-column: 1 / -1;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 40%; /* Altura más controlada para el video superior */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* ESTILO UNIFORME PARA LOS CUADROS DE CÓDIGO */
+        .code-window {
+            background: #1e1e2e;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            height: 400px; /* ALTURA IGUAL PARA TODOS */
+            transition: transform 0.3s ease;
+        }
+
+        .code-window:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .code-header {
+            background: #313244;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+        .red { background: #f38ba8; }
+        .yellow { background: #f9e2af; }
+        .green { background: #a6e3a1; }
+
+        .filename {
+            margin-left: 10px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .code-content {
+            padding: 15px;
+            margin: 0;
+            color: #cdd6f4;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            overflow-y: auto; /* Scroll si el código es muy largo */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        /* Estilo para el scrollbar en Chrome/Safari */
+        .code-content::-webkit-scrollbar { width: 6px; }
+        .code-content::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .tech-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--accent);
+            display: inline-block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .content-layout { grid-template-columns: 1fr; }
+            .video-container { padding-bottom: 56.25%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <div class="main-container">
+        <header class="hero-section">
+            <a href="Interfaz.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Regresar al Menú
+            </a>
+            <div style="margin-top: 10px;">
+                <div class="tech-badge">
+                    <i class="fas fa-sync-alt"></i> Bucles en python
+                </div>
+                <h1>Los bucles en Python, principalmente for y while, permiten repetir bloques de código eficientemente. El bucle for se usa para iterar sobre secuencias (listas, rangos, cadenas), mientras que while repite código mientras una condición sea verdadera. Se controlan con break (salir), continue (saltar iteración) y pass (bucle vacío</h1>
+            </div>
+        </header>
+
+        <div class="content-layout">
+            
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe 
+                        src="https://drive.google.com/file/d/153BnvquuOE-n0w6N60N-u1IcZrYtCLsl/preview" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">seguridad_bucle.py</span>
+                </div>
+                <pre class="code-content">
+# Validación de contraseña con bucle
+password_correcta = "alex123"
+intento = ""
+
+print("--- Sistema de Seguridad ---")
+
+while intento != password_correcta:
+    intento = input("Introduce la contraseña: ")
+    
+    if intento != password_correcta:
+        print("❌ Incorrecta. Reintenta.\n")
+
+print("✅ ¡Contraseña Correcta!")</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">multiplos_5.py</span>
+                </div>
+                <pre class="code-content">
+# Muestra los números del 1 al 50 que sean múltiplos de 5.
+# 1. Definimos el punto de partida (el primer número de nuestra lista)
+numero = 1
+
+# 2. El bucle se ejecutará mientras 'numero' sea menor o igual a 50
+while numero <= 50:
+    
+    # 3. Verificamos si el número es múltiplo de 5 usando el operador módulo (%)
+    # Si el residuo de dividir 'numero' entre 5 es exactamente 0, es múltiplo
+    if numero % 5 == 0:
+        
+        # 4. Si la condición del 'if' es verdadera, mostramos el número en pantalla
+        print(numero)
+    
+    # 5. IMPORTANTE: Incrementamos el número en 1 en cada vuelta del bucle
+    # Esto permite que el bucle avance del 1 al 2, del 2 al 3, y así sucesivamente
+    numero += 1</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">limite_50.py</span>
+                </div>
+                <pre class="code-content">
+# Solicitamos el número al usuario
+# Agregamos el paréntesis de cierre ) al final de la línea
+numero = int(input("Ingresa un número: "))
+
+# Comparamos el número con el límite
+if numero > 50:
+    print("El número", numero, "es mayor que 50")
+else:
+    print("El número", numero, "no es mayor que 50")</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">contadores.py</span>
+                </div>
+                <pre class="code-content">
+# --- BLOQUE 1: NÚMEROS DEL 1 AL 10 ---
+print("Números del 1 al 10:")
+# 1. Definimos el inicio en 1
+i = 1
+
+# 2. El bucle se repite mientras 'i' sea menor o igual a 10
+while i <= 10: 
+    # 3. Imprimimos el valor actual de 'i'
+    print(i)
+    # 4. Sumamos 1 a 'i' en cada vuelta para avanzar
+    i += 1 
+
+
+# --- BLOQUE 2: NÚMEROS PARES DEL 2 AL 20 ---
+print("\nNúmeros pares del 2 al 20:")
+# 1. Empezamos en 2 porque es el primer par
+numero = 2
+
+# 2. El bucle se detendrá cuando 'numero' pase de 20
+while numero <= 20: 
+    # 3. Mostramos el número par actual
+    print(numero)
+    # 4. IMPORTANTE: Sumamos 2 para saltar directamente al siguiente par
+    numero += 2 
+    # Nota: Se eliminó la palabra 'cleae' que causaba error.
+
+
+# --- BLOQUE 3: NÚMEROS DEL 10 AL 1 (DESCENDENTE) ---
+print("\nNúmeros del 10 al 1 en orden descendente:")
+# 1. Definimos el punto de partida (el más alto)
+numero_desc = 10
+
+# 2. El bucle funciona mientras el número no sea menor a 1
+while numero_desc >= 1:
+    # 3. Imprimimos el valor actual
+    print(numero_desc)
+    
+    # 4. Restamos 1 en cada vuelta para ir hacia atrás
+    numero_desc -= 1</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">suma_acumulada.py</span>
+                </div>
+                <pre class="code-content">
+#Pide un número y calcula la suma acumulada desde 1 hasta ese valor
+# 1. Pedimos el número límite al usuario
+limite = int(input("Introduce un número para calcular la suma acumulada: "))
+
+# 2. Inicializamos las variables
+suma = 0
+contador = 1
+
+# 3. El bucle suma cada número hasta llegar al límite
+while contador <= limite:
+    suma += contador  # Sumamos el valor actual del contador a la bolsa
+    contador += 1     # Pasamos al siguiente número
+
+# 4. Mostramos el resultado final
+print(f"\nLa suma acumulada desde 1 hasta {limite} es: {suma}")</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">tablas.py</span>
+                </div>
+                <pre class="code-content">
+#Muestra la tabla de multiplicar del número que ingrese el usuario.
+# 1. Definimos el número de la tabla
+numero = int(input("Ingresa un numero: "))
+
+# 2. Inicializamos un contador en 1
+contador = 1
+
+print(f"\nTabla del {numero}:")
+
+# 3. El bucle se ejecuta mientras el contador sea menor o igual a 12
+while contador <= 12:
+    resultado = numero * contador
+    print(f"{numero} x {contador} = {resultado}")
+    
+    # 4. ¡Importante! Sumamos 1 al contador en cada vuelta
+    contador += 1</pre>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="filename">triangulo.py</span>
+                </div>
+                <pre class="code-content">
+
+#Imprime un triángulo de asteriscos de 5 filas (* / ** / *** …).
+# 1. Creamos una variable 'filas_totales' para guardar el límite (cuántos pisos tendrá el triángulo)
+filas_totales = 5 
+
+# 2. Creamos un contador llamado 'fila_actual' que empieza en 1 (nuestro punto de partida)
+fila_actual = 1 
+
+# 3. Iniciamos el bucle 'while'. Se leería: "Mientras el número de la fila actual no pase de 5..."
+while fila_actual <= filas_totales: 
+
+    # 4. Creamos la variable 'triangulo'. 
+    # Multiplicamos el texto "*" por el valor de 'fila_actual'. 
+    # Si fila_actual es 3, Python genera "***".
+    triangulo = "*" * fila_actual 
+
+    # 5. La función 'print' muestra en la consola el contenido de la variable 'triangulo'
+    print(triangulo) 
+
+    # 6. sumamos 1 a 'fila_actual' (fila_actual = fila_actual + 1).
+    # Esto hace que en la siguiente vuelta el triángulo tenga un asterisco más.
+    # También evita que el bucle sea infinito, ya que eventualmente llegará a 6 y se detendrá.
+    fila_actual += 1</pre>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
