@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deberes · tarjetas interactivas</title>
+  <style>
+    /* Variables y reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #1e1e2f;  /* fondo oscuro moderno */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+    }
+
+    /* cabecera sencilla */
+    .header {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      color: #f0f0f5;
+      font-weight: 500;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      border-left: 6px solid #7b4dff;
+      padding-left: 1.5rem;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .header h1 span {
+      font-weight: 300;
+      color: #b9b9e6;
+    }
+
+    /* grid principal */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ---------- CARD con estilo neumorphism / soft shadow ---------- */
+    .card {
+      background: #edf2f7;  /* card clara con relieve (gris muy suave) */
+      border-radius: 2.5rem;   /* bordes muy redondeados, moderno */
+      padding: 2rem 1.5rem 1.8rem 1.5rem;
+      box-shadow: 
+        12px 12px 24px rgba(10, 10, 20, 0.6),    /* sombra oscura exterior (fondo) */
+        -8px -8px 16px rgba(255, 255, 255, 0.7),  /* luz simulada (neumorphism) */
+        inset 2px 2px 6px rgba(255,255,255,0.8),  /* suave luz interior */
+        inset -3px -3px 8px rgba(0,0,0,0.05);
+      
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(2px); /* refuerza sensación de relieve */
+    }
+
+    /* Efecto hover: elevar ligeramente + sombra más profunda */
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 
+        20px 20px 30px rgba(0, 0, 0, 0.5),
+        -10px -10px 22px rgba(255, 255, 255, 0.6),
+        inset 1px 1px 4px rgba(255,255,255,0.8),
+        inset -2px -2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* icono representativo (usamos un pseudo-elemento + font awesome solo con HTML) */
+    .card-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      filter: drop-shadow(2px 4px 6px rgba(90, 60, 180, 0.3));
+      display: flex;
+      justify-content: center;
+    }
+
+    /* título grande "Deber 1" */
+    .card h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #1e1e2f;         /* texto oscuro para contraste con fondo claro */
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    /* descripción pequeña */
+    .card p {
+      color: #2d3a4b;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0.75rem 0 1.8rem 0;
+      text-align: center;
+      font-weight: 400;
+      padding: 0 0.2rem;
+    }
+
+    /* contenedor de botones (flex) */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: auto;
+      flex-wrap: wrap;
+    }
+
+    /* Estilo base botones */
+    .btn {
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.8rem 1.7rem;
+      border-radius: 50px;            /* completamente redondeados */
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* botón "Ver" – azul brillante */
+    .btn-primary {
+      background: #3a6eff;        /* azul brillante */
+      color: white;
+      box-shadow: 0 6px 14px rgba(58, 110, 255, 0.4);
+    }
+
+    /* botón "Vista previa" – morado brillante */
+    .btn-secondary {
+      background: #9f4bff;        /* morado brillante */
+      color: white;
+      box-shadow: 0 6px 14px rgba(159, 75, 255, 0.4);
+    }
+
+    /* efecto de iluminación hover en botones */
+    .btn-primary:hover {
+      background: #4d7aff;
+      box-shadow: 0 8px 22px rgba(58, 110, 255, 0.8), 0 0 0 2px rgba(255,255,255,0.3);
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    .btn-secondary:hover {
+      background: #b05eff;
+      box-shadow: 0 8px 22px rgba(159, 75, 255, 0.8), 0 0 0 2px rgba(255,255,255,0.3);
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    /* efecto activo (presionado) */
+    .btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Responsive: ajustes en móvil */
+    @media (max-width: 600px) {
+      .grid-cards {
+        gap: 1.5rem;
+      }
+      .card {
+        padding: 1.8rem 1.2rem 1.5rem;
+      }
+      .card h2 {
+        font-size: 2.2rem;
+      }
+      .btn {
+        padding: 0.7rem 1.4rem;
+        font-size: 0.9rem;
+      }
+      .header h1 {
+        font-size: 1.8rem;
+        padding-left: 1rem;
+      }
+    }
+
+    /* ejemplo de iconos mediante caracteres / entidades + efectos */
+    .icon-emoj {
+      font-size: 3.2rem;
+      filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.2));
+      transition: transform 0.2s;
+    }
+    .card:hover .icon-emoj {
+      transform: rotate(2deg) scale(1.05);
+    }
+
+    /* pequeños detalles de espaciado */
+    .footer-note {
+      margin-top: 4rem;
+      color: #9a9ac0;
+      font-size: 0.9rem;
+      border-top: 1px solid #2f2f4a;
+      padding-top: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>📋 <span>deberes · </span>interfaz moderna</h1>
+  </header>
+
+  <!-- grid de cards (neumorphism, hover elevado) -->
+  <div class="grid-cards">
+    
+    <!-- Deber 1 -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">📘</span>
+      </div>
+      <h2>Deber 1</h2>
+      <p>Sentencia IF</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 1')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: resumen del Deber 1')">Vista previa</button>
+            
+      </div>
+    </div>
+    
+    <!-- Deber 2 -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">💻</span>
+      </div>
+      <h2>Deber 2</h2>
+      <p>Estructuras condicionales y ejercicios con Python.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 2')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: fragmento del Deber 2')">Vista previa</button>
+      </div>
+    </div>
+    
+    <!-- Deber 3 -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">🧮</span>
+      </div>
+      <h2>Deber 3</h2>
+      <p>Funciones, arreglos y primeros proyectos modulares.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 3')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: avance del Deber 3')">Vista previa</button>
+      </div>
+    </div>
+    
+    <!-- Deber 4 -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">🗄️</span>
+      </div>
+      <h2>Deber 4</h2>
+      <p>Introducción a bases de datos: diagramas ER.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 4')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: esquema del Deber 4')">Vista previa</button>
+      </div>
+    </div>
+    
+    <!-- Deber 5 -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">⚙️</span>
+      </div>
+      <h2>Deber 5</h2>
+      <p>Algoritmos de ordenamiento y complejidad.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 5')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: ejemplo del Deber 5')">Vista previa</button>
+      </div>
+    </div>
+    
+    <!-- Deber 6 (para demostrar grid completa) -->
+    <div class="card">
+      <div class="card-icon">
+        <span class="icon-emoj">📱</span>
+      </div>
+      <h2>Deber 6</h2>
+      <p>Mockups de interfaz y principios UX.</p>
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="alert('Mostrar contenido completo: Deber 6')">Ver</button>
+        <button class="btn btn-secondary" onclick="alert('Vista previa: diseño del Deber 6')">Vista previa</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-note">
+    <span>✨ cards con neumorphism · botones brillantes · hover que eleva ✨</span>
+  </footer>
+
+  <script>
+    // (opcional) Se puede sustituir alert por navegación suave o modales.
+    // Los botones ya cuentan con efecto visual hover/iluminación.
+    // Cero modificaciones al estilo, todo funcional y moderno.
+  </script>
+</body>
+</html>

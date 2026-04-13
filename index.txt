@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Programación | Alex Chiguano</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-light: #ffffff;
+            --bg-color: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Estilo de la Portada */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: var(--text-light);
+            width: 100%;
+            padding: 100px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 40px;
+            margin-top: -50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .profile-info {
+            margin-bottom: 30px;
+        }
+
+        .profile-info h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Botón de Enlace */
+        .btn-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section">
+        <h1>Programación y Desarrollo de Software</h1>
+        <p>Portafolio Académico y Profesional</p>
+    </header>
+
+    <main class="container">
+        <section class="profile-info">
+            <h2>Desarrollado por:</h2>
+            <p style="font-size: 1.5rem; font-weight: 500;">Alex Chiguano</p>
+        </section>
+
+        <section class="content">
+            <p>Bienvenido al repositorio de actividades y proyectos de desarrollo. Aquí podrás encontrar la documentación y el código de las tareas asignadas.</p>
+            
+            <a href="Interfaz.html" class="btn-link">Ver Listado de Deberes</a>
+            
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 - Todos los derechos reservados
+    </footer>
+
+</body>
+</html>
